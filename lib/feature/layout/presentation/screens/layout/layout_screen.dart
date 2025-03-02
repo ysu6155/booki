@@ -1,7 +1,11 @@
 import 'package:booki/core/utils/extensions.dart';
+import 'package:booki/feature/Cart/presentation/screens/cart_screen.dart';
 import 'package:booki/feature/home/presentation/screens/home/home_screen.dart';
 import 'package:booki/feature/welcome/presentation/screens/welcome/welcome_screen.dart';
+import 'package:booki/feature/wishlist/presentation/cubit/wishlist_cubit.dart';
+import 'package:booki/feature/wishlist/presentation/screens/wishlist_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:booki/core/service/local/shared_keys.dart';
@@ -25,16 +29,14 @@ class BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
   Widget build(BuildContext context) {
     final List<Widget> pages = [
       HomeScreen(),
-      Scaffold(body: Center(child: Text("Test Page"))),
-      Scaffold(),
+      WishlistScreen(),
+      CartScreen(),
       ProfileScreen(),
     ];
     return Scaffold(
       body: pages[_selectedIndex],
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: AppColor.white,
-        ),
+        decoration: BoxDecoration(color: AppColor.white),
         child: BottomNavigationBar(
           currentIndex: _selectedIndex,
           onTap: (index) {

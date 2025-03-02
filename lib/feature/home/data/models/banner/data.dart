@@ -6,12 +6,13 @@ class Data {
   Data({this.sliders});
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        sliders: (json['sliders'] as List<dynamic>?)
+    sliders:
+        (json['sliders'] as List<dynamic>?)
             ?.map((e) => Slider.fromJson(e as Map<String, dynamic>))
             .toList(),
-      );
+  );
 
   Map<String, dynamic> toJson() => {
-        'sliders': sliders?.map((e) => e.toJson()).toList(),
-      };
+    'sliders': sliders?.map((e) => e.toJson()).toList(),
+  };
 }

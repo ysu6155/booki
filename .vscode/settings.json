@@ -1,4 +1,5 @@
 {
   "cSpell.words": ["booki"],
-  "cmake.ignoreCMakeListsMissing": true
+  "cmake.ignoreCMakeListsMissing": true,
+  "dart.flutterSdkPath": "~/dev/flutter_29"
 }

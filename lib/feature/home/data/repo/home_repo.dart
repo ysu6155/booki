@@ -8,15 +8,16 @@ import 'package:booki/feature/home/data/models/best_sellers_response/best_seller
 class HomeRepo {
   static Future<BestSellersResponse?> fetchBookDetails(int bookId) async {
     try {
-      final response =
-          await DioHelper.get(endPoints: EndPoints.productsBestseller);
+      final response = await DioHelper.get(
+        endPoints: EndPoints.productsBestseller,
+      );
       if (response.statusCode == 200) {
         return BestSellersResponse.fromJson(response.data);
       } else {
         throw Exception("Failed to load book details");
       }
     } catch (e) {
-      print("Error: $e");
+      log("Error: $e");
       return null;
     }
   }

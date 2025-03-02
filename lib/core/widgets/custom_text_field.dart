@@ -48,7 +48,8 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         floatingLabelBehavior: floatingLabelBehavior,
         labelText: labelText,
-        labelStyle: labelStyle ??
+        labelStyle:
+            labelStyle ??
             textStyle.copyWith(
               color: AppColor.black,
               fontWeight: FontWeight.bold,
@@ -60,12 +61,13 @@ class CustomTextField extends StatelessWidget {
           fontSize: 16.sp,
         ),
         hintText: hintText,
-        suffixIcon: isPassword
-            ? IconButton(
-                icon: SvgPicture.asset(AppAssets.eyaSVG, width: 20.sp),
-                onPressed: togglePasswordVisibility,
-              )
-            : null,
+        suffixIcon:
+            isPassword
+                ? IconButton(
+                  icon: SvgPicture.asset(AppAssets.eyaSVG, width: 20.sp),
+                  onPressed: togglePasswordVisibility,
+                )
+                : null,
       ),
       style: textStyle.copyWith(fontSize: 16.sp, color: AppColor.black),
       validator: validator,

@@ -43,8 +43,9 @@ class FormSignUp extends StatelessWidget {
               floatingLabelBehavior: FloatingLabelBehavior.always,
               hintText: LocaleKeys.youssifShaban.tr(),
               labelText: LocaleKeys.name.tr(),
-              validator: (value) =>
-                  value!.isEmpty ? LocaleKeys.nameIsRequired.tr() : null,
+              validator:
+                  (value) =>
+                      value!.isEmpty ? LocaleKeys.nameIsRequired.tr() : null,
             ),
             16.H,
             CustomTextField(
@@ -62,8 +63,8 @@ class FormSignUp extends StatelessWidget {
             ),
             16.H,
             BlocBuilder<SignUpCubit, SignUpState>(
-              buildWhen: (previous, current) =>
-                  current is PasswordVisibilityToggled,
+              buildWhen:
+                  (previous, current) => current is PasswordVisibilityToggled,
               builder: (context, state) {
                 return CustomTextField(
                   labelText: LocaleKeys.password.tr(),
@@ -74,16 +75,18 @@ class FormSignUp extends StatelessWidget {
                   isPasswordVisible: signUpCubit.isPasswordVisible,
                   togglePasswordVisibility:
                       signUpCubit.togglePasswordVisibility,
-                  validator: (value) => value!.isEmpty
-                      ? LocaleKeys.passwordIsRequired.tr()
-                      : null,
+                  validator:
+                      (value) =>
+                          value!.isEmpty
+                              ? LocaleKeys.passwordIsRequired.tr()
+                              : null,
                 );
               },
             ),
             16.H,
             BlocBuilder<SignUpCubit, SignUpState>(
-              buildWhen: (previous, current) =>
-                  current is PasswordVisibilityToggled,
+              buildWhen:
+                  (previous, current) => current is PasswordVisibilityToggled,
               builder: (context, state) {
                 return CustomTextField(
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -109,8 +112,8 @@ class FormSignUp extends StatelessWidget {
             ),
             16.H,
             BlocBuilder<SignUpCubit, SignUpState>(
-              buildWhen: (previous, current) =>
-                  current is TermsAgreementToggled,
+              buildWhen:
+                  (previous, current) => current is TermsAgreementToggled,
               builder: (context, state) {
                 return Row(
                   children: [
@@ -131,15 +134,16 @@ class FormSignUp extends StatelessWidget {
             12.H,
             CustomButton(
               name: Text(LocaleKeys.signUp.tr(), style: textStyle),
-              onTap: () => signUpCubit.register(
-                RegisterParams(
-                  email: signUpCubit.emailController.text,
-                  password: signUpCubit.passwordController.text,
-                  name: signUpCubit.nameController.text,
-                  passwordConfirmation:
-                      signUpCubit.confirmPasswordController.text,
-                ),
-              ),
+              onTap:
+                  () => signUpCubit.register(
+                    RegisterParams(
+                      email: signUpCubit.emailController.text,
+                      password: signUpCubit.passwordController.text,
+                      name: signUpCubit.nameController.text,
+                      passwordConfirmation:
+                          signUpCubit.confirmPasswordController.text,
+                    ),
+                  ),
             ),
           ],
         ),

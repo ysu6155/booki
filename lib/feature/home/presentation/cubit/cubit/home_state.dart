@@ -18,9 +18,10 @@ class BestSellersResponse extends HomeState {
 
   factory BestSellersResponse.fromJson(Map<String, dynamic> json) {
     return BestSellersResponse(
-      products: (json['data']['products'] as List)
-          .map((e) => Product.fromJson(e))
-          .toList(),
+      products:
+          (json['data']['products'] as List)
+              .map((e) => Product.fromJson(e))
+              .toList(),
     );
   }
 }

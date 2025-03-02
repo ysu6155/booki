@@ -10,9 +10,10 @@ class BestSellersResponse {
 
   factory BestSellersResponse.fromJson(Map<String, dynamic> json) {
     return BestSellersResponse(
-      data: json['data'] == null
-          ? null
-          : Data.fromJson(json['data'] as Map<String, dynamic>),
+      data:
+          json['data'] == null
+              ? null
+              : Data.fromJson(json['data'] as Map<String, dynamic>),
       message: json['message'] as String?,
       error: json['error'] as List<dynamic>?,
       status: json['status'] as int?,
@@ -20,9 +21,9 @@ class BestSellersResponse {
   }
 
   Map<String, dynamic> toJson() => {
-        'data': data?.toJson(),
-        'message': message,
-        'error': error,
-        'status': status,
-      };
+    'data': data?.toJson(),
+    'message': message,
+    'error': error,
+    'status': status,
+  };
 }

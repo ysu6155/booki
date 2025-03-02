@@ -22,4 +22,5 @@ sealed class AppAssets {
   static String profile = "$iconPath/Profile.svg";
   static String notification = "$iconPath/notification.svg";
   static String search = "$iconPath/search.svg";
+  static String shape = "$iconPath/Shape.svg";
 }

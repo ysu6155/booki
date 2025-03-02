@@ -5,22 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 showErrorToast(BuildContext context, String error) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(error),
-      backgroundColor: AppColor.red,
-    ),
-  );
+  ScaffoldMessenger.of(
+    context,
+  ).showSnackBar(SnackBar(content: Text(error), backgroundColor: AppColor.red));
 }
 
 showLoadingDialog(BuildContext context) {
   showDialog(
     context: context,
-    builder: (context) => Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Lottie.asset(AppAssets.loading),
-      ],
-    ),
+    builder:
+        (context) => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Lottie.asset(AppAssets.loading)],
+        ),
   );
 }

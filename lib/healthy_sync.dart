@@ -10,20 +10,22 @@ class HealthySync extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(360, 690),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, child) {
-          return MaterialApp(
-              // darkTheme: darkTheme,
-              theme: themeLight,
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              debugShowCheckedModeBanner: false,
-              title: 'Healthy Sync',
-              home: child);
-        },
-        child: SplashScreen());
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return MaterialApp(
+          // darkTheme: darkTheme,
+          theme: themeLight,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          debugShowCheckedModeBanner: false,
+          title: 'Healthy Sync',
+          home: child,
+        );
+      },
+      child: SplashScreen(),
+    );
   }
 }

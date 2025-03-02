@@ -1,8 +1,10 @@
+import 'package:booki/core/utils/app_assets.dart';
 import 'package:booki/core/utils/app_color.dart';
 import 'package:booki/feature/home/presentation/cubit/cubit/home_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeBanner extends StatefulWidget {
@@ -19,7 +21,7 @@ class _HomeBannerState extends State<HomeBanner> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeCubit>().fetchSliders(); // استدعاء الـ API عند فتح الشاشة
+    context.read<HomeCubit>().fetchSliders();
   }
 
   @override
@@ -27,21 +29,24 @@ class _HomeBannerState extends State<HomeBanner> {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state is SlidersLoading) {
-          return const Center(child: CircularProgressIndicator()); // مؤشر تحميل
+          return Center(child: Lottie.asset(AppAssets.loading));
         } else if (state is SlidersError) {
-          return Center(child: Text(state.message)); // رسالة خطأ لو الـ API فشل
+          return Center(child: Text(state.message));
         } else if (state is SlidersSuccess) {
           return Column(
             children: [
               CarouselSlider.builder(
                 carouselController: _carouselController,
                 itemCount: state.sliders.length,
-                itemBuilder:
-                    (BuildContext context, int index, int pageViewIndex) {
+                itemBuilder: (
+                  BuildContext context,
+                  int index,
+                  int pageViewIndex,
+                ) {
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      state.sliders[index] ?? "", // تحميل الصور من API
+                      state.sliders[index] ?? "",
                       fit: BoxFit.cover,
                       width: double.infinity,
                       loadingBuilder: (context, child, loadingProgress) {
@@ -50,8 +55,11 @@ class _HomeBannerState extends State<HomeBanner> {
                       },
                       errorBuilder: (context, error, stackTrace) {
                         return const Center(
-                          child: Icon(Icons.broken_image,
-                              size: 50, color: Colors.grey),
+                          child: Icon(
+                            Icons.broken_image,
+                            size: 50,
+                            color: Colors.grey,
+                          ),
                         );
                       },
                     ),
@@ -89,7 +97,7 @@ class _HomeBannerState extends State<HomeBanner> {
             ],
           );
         }
-        return const SizedBox.shrink(); // في حالة لم يكن هناك بيانات
+        return const SizedBox.shrink();
       },
     );
   }

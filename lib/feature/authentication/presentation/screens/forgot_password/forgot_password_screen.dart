@@ -30,9 +30,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         top: false,
         child: Container(
           padding: EdgeInsets.only(top: 40.sp),
-          decoration: BoxDecoration(
-            gradient: AppColor.primaryGradient,
-          ),
+          decoration: BoxDecoration(gradient: AppColor.primaryGradient),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -53,57 +51,60 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
                 30.H,
                 Container(
-                    width: 1.sw,
-                    padding: EdgeInsets.all(24.sp),
-                    decoration: BoxDecoration(
-                      color: AppColor.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24.r),
-                        topRight: Radius.circular(24.r),
-                      ),
+                  width: 1.sw,
+                  padding: EdgeInsets.all(24.sp),
+                  decoration: BoxDecoration(
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24.r),
+                      topRight: Radius.circular(24.r),
                     ),
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          16.H,
-                          CustomTextField(
-                              controller: email,
-                              labelText: LocaleKeys.emailPhone.tr(),
-                              labelStyle: TextStyle(
-                                color: AppColor.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.sp,
-                              ),
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: LocaleKeys.enterYourEmailOrPhone.tr(),
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return LocaleKeys.emailIsRequired.tr();
-                                }
-                                return null;
-                              }),
-                          32.H,
-                          CustomButton(
-                            name: Text(
-                              LocaleKeys.sendCode.tr(),
-                              style: textStyle,
-                            ),
-                            onTap: () {
-                              if (formKey.currentState!.validate()) {
-                                context.push(BlocProvider(
+                  ),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        16.H,
+                        CustomTextField(
+                          controller: email,
+                          labelText: LocaleKeys.emailPhone.tr(),
+                          labelStyle: TextStyle(
+                            color: AppColor.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.sp,
+                          ),
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                          hintText: LocaleKeys.enterYourEmailOrPhone.tr(),
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return LocaleKeys.emailIsRequired.tr();
+                            }
+                            return null;
+                          },
+                        ),
+                        32.H,
+                        CustomButton(
+                          name: Text(
+                            LocaleKeys.sendCode.tr(),
+                            style: textStyle,
+                          ),
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              context.push(
+                                BlocProvider(
                                   create: (context) => VerificationCubit(),
                                   child: VerificationScreen(phone: email.text),
-                                ));
-                              }
-                            },
-                          ),
-                          100.H,
-                        ],
-                      ),
-                    )),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        100.H,
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

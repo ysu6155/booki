@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:booki/core/service/local/shared_keys.dart';
+import 'package:booki/core/service/local/shared_prefs_helper.dart';
 import 'package:booki/core/utils/app_assets.dart';
 import 'package:booki/core/utils/app_color.dart';
 import 'package:booki/feature/home/presentation/cubit/cubit/home_cubit.dart';
@@ -8,12 +12,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    log(SharedHelper.get(SharedKeys.kToken));
+
     return BlocProvider(
       create: (context) => HomeCubit()..getBestSellers(),
       child: Scaffold(
@@ -35,7 +42,7 @@ class HomeScreen extends StatelessWidget {
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             if (state is BestSellersLoading) {
-              return Center(child: CircularProgressIndicator());
+              return Center(child: Lottie.asset(AppAssets.loading));
             } else if (state is BestSellersResponse) {
               return ListView(
                 children: [

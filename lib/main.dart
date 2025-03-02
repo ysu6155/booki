@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:booki/core/service/local/shared_keys.dart';
 import 'package:booki/core/service/local/shared_prefs_helper.dart';
 import 'package:booki/core/utils/app_assets.dart';
 import 'package:booki/healthy_sync.dart';
@@ -13,8 +16,9 @@ void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],
-      path: AppAssets
-          .translationPath, // <-- change the path of the translation files
+      path:
+          AppAssets
+              .translationPath, // <-- change the path of the translation files
       fallbackLocale: Locale('en'),
       startLocale: Locale("en"),
 

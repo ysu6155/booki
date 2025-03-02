@@ -26,12 +26,15 @@ class SignUpScreen extends StatelessWidget {
           child: Column(
             children: [
               30.H,
-              Text("Hello! Register to get started",
-                  style: textStyle.copyWith(color: AppColor.dark)),
+              Text(
+                "Hello! Register to get started",
+                style: textStyle.copyWith(color: AppColor.dark),
+              ),
               30.H,
               BlocProvider(
-                  create: (context) => SignUpCubit(),
-                  child: FormSignUp().paddingAll(16.sp)),
+                create: (context) => SignUpCubit(),
+                child: FormSignUp().paddingAll(16.sp),
+              ),
             ],
           ),
         ),
@@ -44,10 +47,11 @@ class SignUpScreen extends StatelessWidget {
             style: TextStyle(fontSize: 12.sp),
           ),
           TextButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
-            ),
+            onPressed:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                ),
             child: Text(
               LocaleKeys.login.tr(),
               style: textStyle.copyWith(

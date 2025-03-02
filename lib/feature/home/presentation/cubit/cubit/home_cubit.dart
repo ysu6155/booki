@@ -1,10 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:booki/core/network/dio_helper.dart';
-import 'package:booki/core/network/end_points.dart';
 import 'package:booki/feature/home/data/repo/home_repo.dart';
-import 'package:booki/feature/home/data/models/best_sellers_response/best_sellers_response.dart';
 import 'package:booki/feature/home/data/models/best_sellers_response/product.dart';
 
 part 'home_state.dart';
@@ -19,9 +16,7 @@ class HomeCubit extends Cubit<HomeState> {
       final response = await HomeRepo.getBestSellers();
 
       if (response != null && response.data != null) {
-        // ✅ تأكد إن الـ response مش null
-        List<Product> books =
-            response?.data?.products ?? []; // ✅ تعديل طريقة جلب الكتب
+        List<Product> books = response.data?.products ?? [];
         emit(BestSellersResponse(products: books));
       } else {
         emit(BestSellersError("Failed to fetch best sellers"));
@@ -36,14 +31,12 @@ class HomeCubit extends Cubit<HomeState> {
     emit(SlidersLoading());
     try {
       final response = await HomeRepo.getSliders();
-      print("Response Data: $response"); // ✅ اطبع البيانات واتأكد إنها مش فاضية
-
+      // log("Response Data: $response");
       if (response != null) {
         List<String> sliderImages =
             response.map((slider) => slider.image ?? "").toList();
 
-        print("Slider Images: $sliderImages"); // ✅ اطبع قائمة الصور
-
+        //log("Slider Images: $sliderImages");
         emit(SlidersSuccess(sliderImages));
       } else {
         emit(SlidersError("No sliders available"));

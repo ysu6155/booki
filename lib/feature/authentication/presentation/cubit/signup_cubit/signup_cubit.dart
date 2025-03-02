@@ -38,7 +38,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     'Beni Suef',
     'Fayoum',
     'Qena',
-    'Sohag'
+    'Sohag',
   ];
 
   String? selectedGender;

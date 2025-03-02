@@ -36,10 +36,7 @@ class CardBook extends StatelessWidget {
           Gap(6),
           Text(
             book.name ?? "",
-            style: textStyle.copyWith(
-              color: AppColor.dark,
-              fontSize: 18,
-            ),
+            style: textStyle.copyWith(color: AppColor.dark, fontSize: 18),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -60,10 +57,7 @@ class CardBook extends StatelessWidget {
                 backgroundColor: AppColor.dark,
                 width: 80,
                 height: 30,
-                name: Text(
-                  "Buy",
-                  style: textStyle.copyWith(fontSize: 14),
-                ),
+                name: Text("Buy", style: textStyle.copyWith(fontSize: 14)),
                 onTap: () {
                   // Handle Buy Action
                 },
@@ -72,8 +66,10 @@ class CardBook extends StatelessWidget {
           ),
         ],
       ),
-    ).withTapEffect(onTap: () {
-      context.push(BookDetailsScreen(book:book));
-    });
+    ).withTapEffect(
+      onTap: () {
+        context.push(BookDetailsScreen(book: book));
+      },
+    );
   }
 }

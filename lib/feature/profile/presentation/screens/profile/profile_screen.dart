@@ -29,22 +29,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
       {
         "title": LocaleKeys.email.tr(),
         "value": SharedHelper.get(SharedKeys.email) ?? "",
-        "icon": Icons.email
+        "icon": Icons.email,
       },
       {
         "title": LocaleKeys.phone.tr(),
         "value": SharedHelper.get(SharedKeys.phone) ?? "no phone",
-        "icon": Icons.phone
+        "icon": Icons.phone,
       },
       {
         "title": LocaleKeys.address.tr(),
         "value": SharedHelper.get(SharedKeys.address) ?? "No Address",
-        "icon": Icons.location_on
+        "icon": Icons.location_on,
       },
       {
         "title": LocaleKeys.language.tr(),
         "value": LocaleKeys.languageNaw.tr(),
-        "icon": Icons.language
+        "icon": Icons.language,
       },
       {"title": LocaleKeys.logout.tr(), "value": "", "icon": Icons.logout},
     ];
@@ -54,17 +54,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: Text(
           LocaleKeys.profile.tr(),
           style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-              color: AppColor.white),
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+            color: AppColor.white,
+          ),
         ),
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.logout,
-              color: AppColor.white,
-            ),
+            icon: Icon(Icons.logout, color: AppColor.white),
             onPressed: () {
               SharedHelper.removeKay(SharedKeys.kToken);
               context.pushAndRemoveUntil(const WelcomeScreen());
@@ -79,11 +77,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 CircleAvatar(
                   radius: 50.r,
-                  backgroundImage: Image.network(
-                    SharedHelper.get(
-                      SharedKeys.image ?? "",
-                    ),
-                  ).image,
+                  backgroundImage:
+                      Image.network(
+                        SharedHelper.get(SharedKeys.image ?? ""),
+                      ).image,
                 ),
                 16.W,
                 Column(
@@ -92,9 +89,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Text(
                       SharedHelper.get(SharedKeys.name) ?? "",
                       style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                          color: AppColor.main),
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                        color: AppColor.main,
+                      ),
                     ),
                     Text(SharedHelper.get(SharedKeys.email) ?? ""),
                   ],
@@ -136,30 +134,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       subtitle:
                           item["value"].isNotEmpty ? Text(item["value"]) : null,
-                      trailing: item["title"] == LocaleKeys.logout.tr()
-                          ? Icon(Icons.arrow_forward_ios, color: Colors.red)
-                          : null,
+                      trailing:
+                          item["title"] == LocaleKeys.logout.tr()
+                              ? Icon(Icons.arrow_forward_ios, color: Colors.red)
+                              : null,
                     ).withTapEffect(
-                        highlightColor: AppColor.secondary,
-                        onTap: () {
-                          if (item["title"] == LocaleKeys.logout.tr()) {
-                            SharedHelper.removeKay(SharedKeys.kToken);
-                            context.pushAndRemoveUntil(const WelcomeScreen());
-                          } else if (item["title"] ==
-                              LocaleKeys.language.tr()) {
-                            setState(() {
-                              log(context.locale.toString());
-                              if (context.locale.toString() == 'ar') {
-                                context.setLocale(Locale('en'));
-                              } else {
-                                context.setLocale(Locale('ar'));
-                              }
-                            });
-                          } else if (item["title"] ==
-                              LocaleKeys.editProfile.tr()) {
-                            context.push(EditProfile());
-                          }
-                        }),
+                      highlightColor: AppColor.secondary,
+                      onTap: () {
+                        if (item["title"] == LocaleKeys.logout.tr()) {
+                          SharedHelper.removeKay(SharedKeys.kToken);
+                          context.pushAndRemoveUntil(const WelcomeScreen());
+                        } else if (item["title"] == LocaleKeys.language.tr()) {
+                          setState(() {
+                            log(context.locale.toString());
+                            if (context.locale.toString() == 'ar') {
+                              context.setLocale(Locale('en'));
+                            } else {
+                              context.setLocale(Locale('ar'));
+                            }
+                          });
+                        } else if (item["title"] ==
+                            LocaleKeys.editProfile.tr()) {
+                          context.push(EditProfile());
+                        }
+                      },
+                    ),
                   );
                 },
               ),

@@ -21,9 +21,9 @@ class RegisterParams {
   }
 
   Map<String, dynamic> toJson() => {
-        'name': name,
-        'email': email,
-        'password': password,
-        'password_confirmation': passwordConfirmation,
-      };
+    'name': name,
+    'email': email,
+    'password': password,
+    'password_confirmation': passwordConfirmation,
+  };
 }

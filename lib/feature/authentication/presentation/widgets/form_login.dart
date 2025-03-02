@@ -61,18 +61,20 @@ class FormLogin extends StatelessWidget {
               ),
               8.H,
               BlocBuilder<LoginCubit, LoginState>(
-                buildWhen: (previous, current) =>
-                    current is LoginPasswordVisibilityToggled,
+                buildWhen:
+                    (previous, current) =>
+                        current is LoginPasswordVisibilityToggled,
                 builder: (context, state) {
                   return CustomTextField(
                     textInputAction: TextInputAction.done,
-                    onFieldSubmitted: (value) => loginCubit.login(
-                      RegisterParams(
-                        email: loginCubit.emailController.text,
-                        password: loginCubit.passwordController.text,
-                      ),
-                      context,
-                    ),
+                    onFieldSubmitted:
+                        (value) => loginCubit.login(
+                          RegisterParams(
+                            email: loginCubit.emailController.text,
+                            password: loginCubit.passwordController.text,
+                          ),
+                          context,
+                        ),
                     controller: loginCubit.passwordController,
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     keyboardType: TextInputType.visiblePassword,
@@ -103,8 +105,9 @@ class FormLogin extends StatelessWidget {
                   Row(
                     children: [
                       BlocBuilder<LoginCubit, LoginState>(
-                        buildWhen: (previous, current) =>
-                            current is LoginRememberMeToggled,
+                        buildWhen:
+                            (previous, current) =>
+                                current is LoginRememberMeToggled,
                         builder: (context, state) {
                           return Checkbox(
                             value: loginCubit.rememberMe,

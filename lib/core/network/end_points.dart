@@ -5,4 +5,11 @@ sealed class EndPoints {
   static String register = "/register";
   static String productsBestseller = "/products-bestseller";
   static String sliders = "/sliders";
+  static String addToWishlist = "/add-to-wishlist";
+  static String wishlist = "/wishlist";
+  static String removeFromWishlist = "/remove-from-wishlist";
+  static String products = "/products";
+  static String cart = "/cart";
+  static String addToCart = "/add-to-cart";
+  static String updateCart ="/update-cart";
 }
