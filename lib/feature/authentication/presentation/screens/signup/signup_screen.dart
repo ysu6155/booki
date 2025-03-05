@@ -2,12 +2,10 @@ import 'package:booki/core/themes/light_theme.dart';
 import 'package:booki/feature/authentication/presentation/screens/login/login_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:booki/core/translations/locale_keys.g.dart';
 import 'package:booki/core/utils/app_color.dart';
 import 'package:booki/core/utils/extensions.dart';
-import 'package:booki/feature/authentication/presentation/cubit/signup_cubit/signup_cubit.dart';
 import 'package:booki/feature/authentication/presentation/widgets/form_signup.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -31,10 +29,7 @@ class SignUpScreen extends StatelessWidget {
                 style: textStyle.copyWith(color: AppColor.dark),
               ),
               30.H,
-              BlocProvider(
-                create: (context) => SignUpCubit(),
-                child: FormSignUp().paddingAll(16.sp),
-              ),
+              FormSignUp().paddingAll(16.sp),
             ],
           ),
         ),

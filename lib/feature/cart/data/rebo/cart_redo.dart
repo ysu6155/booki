@@ -70,9 +70,32 @@ class CartRepository {
       );
 
       if (response.statusCode == 201) {
+        data = response.data["data"]["total"];
         return response.data;
       } else {
         throw Exception("Failed to update cart item quantity");
+      }
+    } catch (e) {
+      log(e.toString());
+      throw Exception("Error: $e");
+    }
+  }
+
+  static Future<void> removeFromCartApi(int itemId) async {
+    try {
+      final response = await DioHelper.post(
+        endPoints: EndPoints.removeFromCart,
+        body: {"cart_item_id": itemId},
+        headers: {
+          "Authorization": "Bearer ${SharedHelper.get(SharedKeys.kToken)}",
+        },
+      );
+
+      if (response.statusCode == 200) {
+        data = response.data["data"]["total"];
+        log("تم حذف المنتج بنجاح");
+      } else {
+        throw Exception("فشل في حذف المنتج من السلة");
       }
     } catch (e) {
       log(e.toString());

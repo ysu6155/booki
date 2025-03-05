@@ -14,44 +14,38 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-  providers: [
-    BlocProvider(create: (context) => CartCubit()),
-    BlocProvider(create: (context) => WishlistCubit()..loadWishlist()),
-  ],
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColor.white,
-          centerTitle: true,
-          title: Text(
-            'Wishlist',
-            style: textStyle.copyWith(
-              color: AppColor.dark,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColor.white,
+        centerTitle: true,
+        title: Text(
+          'Wishlist',
+          style: textStyle.copyWith(
+            color: AppColor.dark,
+            fontSize: 20.sp,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.sp),
-          child: BlocBuilder<WishlistCubit, WishlistState>(
-            builder: (context, state) {
-              if (state is WishlistLoading) {
-                return Center(child: Lottie.asset(AppAssets.loading));
-              } else if (state is WishlistLoaded) {
-                return ListView.separated(
-                  itemBuilder: (context, index) {
-                    return WishlistCard(wishlist: state.items[index]);
-                  },
-                  separatorBuilder: (context, index) => Divider(),
-                  itemCount: state.items.length,
-                );
-              } else if (state is WishlistError) {
-                return Center(child: Text(state.message));
-              }
-              return Center(child: Text("No items in wishlist"));
-            },
-          ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20.sp),
+        child: BlocBuilder<WishlistCubit, WishlistState>(
+          builder: (context, state) {
+            if (state is WishlistLoading) {
+              return Center(child: Lottie.asset(AppAssets.loading));
+            } else if (state is WishlistLoaded) {
+              return ListView.separated(
+                itemBuilder: (context, index) {
+                  return WishlistCard(wishlist: state.items[index]);
+                },
+                separatorBuilder: (context, index) => Divider(),
+                itemCount: state.items.length,
+              );
+            } else if (state is WishlistError) {
+              return Center(child: Text(state.message));
+            }
+            return Center(child: Text("No items in wishlist"));
+          },
         ),
       ),
     );

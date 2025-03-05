@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:booki/core/service/local/shared_keys.dart';
 import 'package:booki/core/service/local/shared_prefs_helper.dart';
 import 'package:booki/core/utils/app_assets.dart';
 import 'package:booki/healthy_sync.dart';

@@ -1,9 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:booki/feature/home/data/models/best_sellers_response/product.dart';
 import 'package:booki/feature/wishlist/data/models/wishlist/datum.dart';
-import 'package:booki/feature/wishlist/data/models/wishlist/wishlist.dart';
 import 'package:booki/feature/wishlist/data/rebo/wishlist_rebo.dart';
 
 part 'wishlist_state.dart';

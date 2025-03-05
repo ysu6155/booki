@@ -1,4 +1,5 @@
 import 'package:booki/core/themes/light_theme.dart';
+import 'package:booki/core/utils/app_assets.dart';
 import 'package:booki/core/utils/app_color.dart';
 import 'package:booki/core/utils/extensions.dart';
 import 'package:booki/core/widgets/custom_button.dart';
@@ -6,9 +7,11 @@ import 'package:booki/feature/cart/data/models/cart/cart_item.dart';
 import 'package:booki/feature/cart/data/rebo/cart_redo.dart';
 import 'package:booki/feature/cart/presentation/cubit/cubit/cart_cubit.dart';
 import 'package:booki/feature/cart/presentation/cubit/cubit/cart_state.dart';
+import 'package:booki/feature/cart/presentation/widgets/success_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class CartScreen extends StatelessWidget {
@@ -16,84 +19,82 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context1) {
-    return BlocProvider(
-      create: (context) => CartCubit()..loadCart(),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColor.white,
-          centerTitle: true,
-          title: Text(
-            'My Cart',
-            style: TextStyle(
-              color: AppColor.dark,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColor.white,
+        centerTitle: true,
+        title: Text(
+          'My Cart',
+          style: TextStyle(
+            color: AppColor.dark,
+            fontSize: 20.sp,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.sp),
-          child: BlocListener<CartCubit, CartState>(
-            listener: (context, state) {
-              if (state is CartLimitExceeded) {
-                ScaffoldMessenger.of(context1).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      state.message,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.red,
-                    duration: Duration(seconds: 5),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20.sp),
+        child: BlocListener<CartCubit, CartState>(
+          listener: (context, state) {
+            if (state is CartLimitExceeded) {
+              ScaffoldMessenger.of(context1).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    state.message,
+                    style: TextStyle(color: Colors.white),
                   ),
-                );
-              }
-            },
-            child: BlocBuilder<CartCubit, CartState>(
-              builder: (context, state) {
-                int index1 = 0;
-                if (state is CartLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is CartLoaded) {
-                  return Column(
-                    children: [
-                      Expanded(
-                        child: ListView.separated(
-                          itemBuilder: (context, index) {
-                            index1 = index;
-                            final cartItem = state.items[index];
-                            return newMethod(cartItem);
-                          },
-                          separatorBuilder: (context, index) => const Divider(),
-                          itemCount: state.items.length,
+                  backgroundColor: Colors.red,
+                  duration: Duration(seconds: 5),
+                ),
+              );
+            }
+          },
+          child: BlocBuilder<CartCubit, CartState>(
+            builder: (context, state) {
+              if (state is CartLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is CartLoaded) {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          int index1 = index;
+                          final cartItem = state.items[index];
+                          return newMethod(cartItem);
+                        },
+                        separatorBuilder: (context, index) => const Divider(),
+                        itemCount: state.items.length,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Total:",
+                          style: textStyle.copyWith(color: AppColor.dark),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Total:",
-                            style: textStyle.copyWith(color: AppColor.dark),
-                          ),
-                          Spacer(),
-                          Text(
-                            "${CartRepository.data} EGP",
-                            style: textStyle.copyWith(color: AppColor.dark),
-                          ),
-                        ],
-                      ),
-                      Gap(20),
-                      CustomButton(
-                        name: Text("Checkout", style: textStyle),
-                        onTap: () {},
-                      ),
-                      Gap(15),
-                    ],
-                  );
-                } else if (state is CartError) {
-                  return Center(child: Text(state.message));
-                }
-                return const Center(child: Text("No items in cart"));
-              },
-            ),
+                        Spacer(),
+                        Text(
+                          "${CartRepository.data} EGP",
+                          style: textStyle.copyWith(color: AppColor.dark),
+                        ),
+                      ],
+                    ),
+                    Gap(20),
+                    CustomButton(
+                      name: Text("Checkout", style: textStyle),
+                      onTap: () {
+                        context.push(SuccessAlert());
+                      },
+                    ),
+                    Gap(15),
+                  ],
+                );
+              } else if (state is CartError) {
+                return Center(child: Text(state.message));
+              }
+              return const Center(child: Text("No items in cart"));
+            },
           ),
         ),
       ),
@@ -139,27 +140,23 @@ class CartScreen extends StatelessWidget {
                               ),
                               maxLines: 2,
                             ),
-                            Gap(8),
-                            Row(
-                              children: [
-                                Text(
-                                  "${cartItem.itemProductPrice} EGP",
+                            Gap(4),
+                            Text(
+                              "${cartItem.itemProductPrice} EGP",
 
-                                  style: textStyle.copyWith(
-                                    decoration: TextDecoration.lineThrough,
-                                    fontSize: 14.sp,
-                                    color: AppColor.grey,
-                                  ),
-                                ),
-                                Gap(10),
-                                Text(
-                                  "${cartItem.itemProductDiscount} %  Discount",
-                                  style: textStyle.copyWith(
-                                    fontSize: 14.sp,
-                                    color: AppColor.red,
-                                  ),
-                                ),
-                              ],
+                              style: textStyle.copyWith(
+                                decoration: TextDecoration.lineThrough,
+                                fontSize: 14.sp,
+                                color: AppColor.grey,
+                              ),
+                            ),
+                            Gap(4),
+                            Text(
+                              "${cartItem.itemProductDiscount} %  Discount",
+                              style: textStyle.copyWith(
+                                fontSize: 14.sp,
+                                color: AppColor.red,
+                              ),
                             ),
                             Gap(4),
                             Text(
@@ -210,6 +207,12 @@ class CartScreen extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+            IconButton(
+              onPressed: () {
+                context.read<CartCubit>().removeFromCart(cartItem.itemId ?? 0);
+              },
+              icon: SvgPicture.asset(AppAssets.shape),
             ),
           ],
         ).paddingSymmetric(vertical: 16.sp);

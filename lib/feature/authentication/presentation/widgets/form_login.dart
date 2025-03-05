@@ -7,10 +7,9 @@ import 'package:booki/core/widgets/custom_button.dart';
 import 'package:booki/core/widgets/custom_text_field.dart';
 import 'package:booki/core/widgets/show_dialog.dart';
 import 'package:booki/feature/authentication/data/models/request/register_params.dart';
-import 'package:booki/feature/authentication/presentation/cubit/login_cubit/login_cubit.dart';
-import 'package:booki/feature/authentication/presentation/cubit/login_cubit/login_state.dart';
+import 'package:booki/feature/authentication/presentation/cubit/auth_cubit/auth_cubit.dart';
+import 'package:booki/feature/authentication/presentation/cubit/auth_cubit/auth_state.dart';
 import 'package:booki/feature/authentication/presentation/screens/forgot_password/forgot_password_screen.dart';
-import 'package:booki/feature/authentication/presentation/screens/signup/signup_screen.dart';
 import 'package:booki/core/themes/light_theme.dart';
 import 'package:booki/core/translations/locale_keys.g.dart';
 import 'package:booki/core/utils/app_color.dart';
@@ -22,8 +21,8 @@ class FormLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoginCubit loginCubit = BlocProvider.of<LoginCubit>(context);
-    return BlocListener<LoginCubit, LoginState>(
+    AuthCubit loginCubit = BlocProvider.of<AuthCubit>(context);
+    return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginError) {
           context.pop();
@@ -60,7 +59,7 @@ class FormLogin extends StatelessWidget {
                 },
               ),
               8.H,
-              BlocBuilder<LoginCubit, LoginState>(
+              BlocBuilder<AuthCubit, AuthState>(
                 buildWhen:
                     (previous, current) =>
                         current is LoginPasswordVisibilityToggled,
@@ -104,7 +103,7 @@ class FormLogin extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      BlocBuilder<LoginCubit, LoginState>(
+                      BlocBuilder<AuthCubit, AuthState>(
                         buildWhen:
                             (previous, current) =>
                                 current is LoginRememberMeToggled,

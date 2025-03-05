@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:booki/core/translations/locale_keys.g.dart';
 import 'package:booki/core/utils/app_color.dart';
 import 'package:booki/core/utils/extensions.dart';
-import 'package:booki/feature/authentication/presentation/cubit/login_cubit/login_cubit.dart';
 import 'package:booki/feature/authentication/presentation/widgets/form_login.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -49,10 +48,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               16.H,
-              BlocProvider(
-                create: (context) => LoginCubit(),
-                child: FormLogin(),
-              ),
+              FormLogin(),
             ],
           ).paddingAll(22.sp),
         ),

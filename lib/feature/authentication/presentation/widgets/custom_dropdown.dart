@@ -1,3 +1,4 @@
+import 'package:booki/core/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,7 +27,7 @@ class CustomDropdown extends StatelessWidget {
         label: Text(labelText, style: TextStyle(fontSize: 14.sp)),
         labelStyle: TextStyle(
           fontSize: 16.sp,
-          color: Colors.black,
+          color: AppColor.black,
           fontWeight: FontWeight.bold,
         ),
       ),

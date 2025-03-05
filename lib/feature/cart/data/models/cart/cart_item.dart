@@ -22,6 +22,26 @@ class CartItem {
     this.itemQuantity,
     this.itemTotal,
   });
+  CartItem copyWith({
+    int? itemId,
+    String? itemProductName,
+    String? itemProductImage,
+    String? itemProductPrice,
+    double? itemProductPriceAfterDiscount,
+    int? itemProductDiscount,
+    int? itemQuantity,
+  }) {
+    return CartItem(
+      itemId: itemId ?? this.itemId,
+      itemProductName: itemProductName ?? this.itemProductName,
+      itemProductImage: itemProductImage ?? this.itemProductImage,
+      itemProductPrice: itemProductPrice ?? this.itemProductPrice,
+      itemProductPriceAfterDiscount:
+          itemProductPriceAfterDiscount ?? this.itemProductPriceAfterDiscount,
+      itemProductDiscount: itemProductDiscount ?? this.itemProductDiscount,
+      itemQuantity: itemQuantity ?? this.itemQuantity,
+    );
+  }
 
   factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
     itemId: json['item_id'] as int?,

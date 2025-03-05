@@ -42,7 +42,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                 children: [
                   35.H,
                   buildPage(
-                    image: AppAssets.imageBooki,
+                    image: AppAssets.logoSVG,
                     title: "Order Your Book Now!",
                   ),
                   Spacer(),

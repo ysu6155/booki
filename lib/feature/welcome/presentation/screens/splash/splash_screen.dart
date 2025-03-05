@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:booki/core/themes/light_theme.dart';
 import 'package:booki/core/utils/app_color.dart';
 import 'package:flutter/material.dart';

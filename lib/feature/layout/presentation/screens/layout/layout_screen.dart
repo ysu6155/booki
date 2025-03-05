@@ -1,18 +1,12 @@
-import 'package:booki/core/utils/extensions.dart';
 import 'package:booki/feature/Cart/presentation/screens/cart_screen.dart';
 import 'package:booki/feature/home/presentation/screens/home/home_screen.dart';
-import 'package:booki/feature/welcome/presentation/screens/welcome/welcome_screen.dart';
-import 'package:booki/feature/wishlist/presentation/cubit/wishlist_cubit.dart';
 import 'package:booki/feature/wishlist/presentation/screens/wishlist_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:booki/core/service/local/shared_keys.dart';
-import 'package:booki/core/service/local/shared_prefs_helper.dart';
 import 'package:booki/core/utils/app_assets.dart';
 import 'package:booki/core/utils/app_color.dart';
-import 'package:booki/feature/profile/presentation/screens/profile/profile_screen.dart';
+import 'package:booki/feature/profile/presentation/screens/profile_screen.dart';
 
 class BottomNavigationBarCustom extends StatefulWidget {
   const BottomNavigationBarCustom({super.key});
