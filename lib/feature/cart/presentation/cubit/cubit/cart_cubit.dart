@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
-import 'package:booki/feature/cart/data/models/cart/cart_item.dart';
 import 'package:booki/feature/cart/data/rebo/cart_redo.dart';
 import 'package:booki/feature/cart/presentation/cubit/cubit/cart_state.dart';
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:booki/core/service/local/shared_keys.dart';
 import 'package:booki/core/service/local/shared_prefs_helper.dart';
@@ -47,23 +49,19 @@ class AuthCubit extends Cubit<AuthState> {
     emit(LoginLoading());
     try {
       final response = await AuthRepo.login(params);
-      if (response != null) {
-        await SharedHelper.sava(SharedKeys.kToken, response.data?.token);
-        await SharedHelper.sava(SharedKeys.name, response.data?.user?.name);
-        await SharedHelper.sava(SharedKeys.email, response.data?.user?.email);
-        await SharedHelper.sava(SharedKeys.image, response.data?.user?.image);
+      await SharedHelper.sava(SharedKeys.kToken, response.data?.token);
+      await SharedHelper.sava(SharedKeys.name, response.data?.user?.name);
+      await SharedHelper.sava(SharedKeys.email, response.data?.user?.email);
+      await SharedHelper.sava(SharedKeys.image, response.data?.user?.image);
 
-        emit(LoginSuccess());
+      emit(LoginSuccess());
 
-        if (context.mounted) {
-          context.pushAndRemoveUntil(const BottomNavigationBarCustom());
-        }
-      } else {
-        emit(LoginError("Invalid credentials"));
+      if (context.mounted) {
+        context.pushAndRemoveUntil(const BottomNavigationBarCustom());
       }
-    } catch (e, stackTrace) {
-      print("🔥 Login Error: $e");
-      print("📌 StackTrace: $stackTrace");
+        } catch (e, stackTrace) {
+      log("🔥 Login Error: $e");
+      log("📌 StackTrace: $stackTrace");
       emit(LoginError("An error occurred. Please try again."));
     }
   }
@@ -138,13 +136,9 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final result = await AuthRepo.register(params); // استخدام async/await
 
-      if (result != null) {
-        SharedHelper.sava(SharedKeys.kToken, result.data?.token);
-        emit(SignUpSuccess());
-      } else {
-        emit(SignUpError("LocaleKeys.signUpFailed.tr()")); // رسالة خطأ مترجمة
-      }
-    } catch (e) {
+      SharedHelper.sava(SharedKeys.kToken, result.data?.token);
+      emit(SignUpSuccess());
+        } catch (e) {
       emit(SignUpError(e.toString())); // خطأ عام
     }
   }

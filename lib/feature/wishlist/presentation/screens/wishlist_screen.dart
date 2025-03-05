@@ -1,5 +1,4 @@
 import 'package:booki/core/utils/app_assets.dart';
-import 'package:booki/feature/cart/presentation/cubit/cubit/cart_cubit.dart';
 import 'package:booki/feature/wishlist/presentation/cubit/wishlist_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

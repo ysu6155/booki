@@ -1,7 +1,7 @@
 part of 'profile_cubit.dart';
 
 abstract class ProfileState {
-  @override
+ 
   List<Object?> get props => [];
 }
 

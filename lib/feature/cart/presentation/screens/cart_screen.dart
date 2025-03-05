@@ -59,7 +59,6 @@ class CartScreen extends StatelessWidget {
                     Expanded(
                       child: ListView.separated(
                         itemBuilder: (context, index) {
-                          int index1 = index;
                           final cartItem = state.items[index];
                           return newMethod(cartItem);
                         },
